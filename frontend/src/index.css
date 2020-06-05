@@ -1304,12 +1304,16 @@ body {
   
   .card-box-ico {
     padding: 1rem 3rem 1rem 2.5rem;
-    border: 5px solid #2eca6a;
+    border: 3px solid #00a2ff;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 5px 2px 0 2px ;
   }
   
-  .card-box-ico span {
-    font-size: 4rem;
-    color: #000000;
+  .card-box-ico i {
+    font-size: 3rem;
+    margin-right: 4px;
+    color: #0f5c8b;
   }
   
   .title-c {
