@@ -10,12 +10,16 @@ import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
-    fetch('http://localhost:5000/resorts')
+    let API = process.env.NODE_ENV === "development" 
+      ? 'http://localhost:5000/resorts' 
+      : 'https://beackresortsdemo.herokuapp.com/'
+    fetch(API)
     .then(res => res.json())
     .then(resorts => {
       this.props.setRooms(resorts)
     })
     .catch(error => console.log(error))
+    console.log(process.env.NODE_ENV)
   }
   render(){
     return(
