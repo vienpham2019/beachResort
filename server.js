@@ -12,8 +12,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 // data base 
-const url = process.env.MONGOOSE_URL
-mongoose.connect(url,  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
+const uri = process.env.MONGOOSE_URI
+mongoose.connect(uri,  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
 
 const connection = mongoose.connection 
 connection.once('open' , () => console.log('Connect to database...'))
@@ -22,5 +22,10 @@ connection.once('open' , () => console.log('Connect to database...'))
 app.use('/resorts' , require('./routers/resort'))
 
 const PORT = process.env.PORT || 5000 
+
+// set application is on heroku 
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('frontend/build'))
+}
 
 app.listen(PORT , () => console.log(`Server run at port ${PORT}`))
