@@ -6,6 +6,11 @@ require('dotenv/config')
 
 const app = express()
 
+// set application is on heroku 
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build'))
+}
+
 app.use(cors())
 app.use(express.json())
 
@@ -24,13 +29,5 @@ app.use('/resorts' , require('./routers/resort'))
 
 const PORT = process.env.PORT || 5000 
 
-// set application is on heroku 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static('frontend/build'))
-
-    app.get('*' , (req,res) => {
-        res.sendFile(path.join(__dirname, 'frontend' , 'build' , 'index.html'))
-    })
-}
 
 app.listen(PORT , () => console.log(`Server run at port ${PORT}`))
