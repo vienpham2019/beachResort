@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}))
 
 // data base 
 const uri = process.env.MONGOOSE_URI
-mongoose.connect("mongodb+srv://vienpham:Vp1721998@cluster0-bbx24.mongodb.net/beach_resorts?retryWrites=true&w=majority",  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
+mongoose.connect(uri,  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
 
 const connection = mongoose.connection 
 connection.once('open' , () => console.log('Connect to database...'))
