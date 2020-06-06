@@ -13,8 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 // data base 
-const uri = process.env.MONGOOSE_URI
-mongoose.connect(uri,  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
+mongoose.connect( process.env.MONGODB_URI,  {useNewUrlParser: true, useCreateIndex: true , useUnifiedTopology: true })
 
 const connection = mongoose.connection 
 connection.once('open' , () => console.log('Connect to database...'))
