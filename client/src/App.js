@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
-    fetch('/api/resorts')
+    fetch('http://localhost:5000/api/resorts')
     .then(res => res.json())
     .then(resorts => {
       this.props.setRooms(resorts)
