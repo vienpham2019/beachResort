@@ -25,7 +25,7 @@ const connection = mongoose.connection
 connection.once('open' , () => console.log('Connect to database...'))
 
 // routers 
-app.use('/resorts' , require('./routers/resort'))
+app.use('/api/resorts' , require('./routers/resort'))
 
 const PORT = process.env.PORT || 5000 
 

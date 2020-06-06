@@ -10,13 +10,12 @@ import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
-    fetch('/resorts')
+    fetch('/api/resorts')
     .then(res => res.json())
     .then(resorts => {
       this.props.setRooms(resorts)
     })
     .catch(error => console.log(error))
-    console.log(process.env.API_URL)
   }
   render(){
     return(
