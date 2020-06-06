@@ -11,16 +11,10 @@ import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
-    // axios
-    // .get('/resorts')
-    // .then(resorts => {
-    //   this.props.setRooms(resorts)
-    // })
-    // .catch(error => console.log(error))
-    fetch('http://localhost:5000/resorts')
-    .then(res => res.json())
+    axios
+    .get('/resorts')
     .then(resorts => {
-      this.props.setRooms(resorts)
+      this.props.setRooms(resorts.data)
     })
     .catch(error => console.log(error))
   }
