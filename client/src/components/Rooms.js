@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 
-import RoomsClass from '../rooms_content/rooms_class'
+import RoomsGrid from '../rooms_content/rooms_grid'
 
 class Rooms extends Component {
     render(){
@@ -13,7 +13,7 @@ class Rooms extends Component {
                         </div>
                     </div>
                 </section>
-                <RoomsClass /> 
+                <RoomsGrid history = {this.props.history}/> 
             </div>
         )
     }

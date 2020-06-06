@@ -9,6 +9,7 @@ import Home from './components/Home'
 import Rooms from './components/Rooms'
 import Err from './components/Err'
 import Footer from './components/Footer'
+import RoomSingle from './rooms_content/room_single'
 
 class App extends Component {
   componentDidMount(){
@@ -23,6 +24,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={(routerProps) => <Home {...routerProps} />}/>
           <Route exact path="/rooms" render={(routerProps) => <Rooms {...routerProps} />}/>
+          <Route exact path="/room_single" render={(routerProps) => <RoomSingle {...routerProps} />}/>
           <Route component = {Err} />
         </Switch>
         <Footer />

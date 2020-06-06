@@ -1,13 +1,21 @@
 import React , { Component } from 'react'
 import {connect} from 'react-redux'
 
-class RoomsClass extends Component {
+class RoomsGrid extends Component {
     render(){
         let rooms = this.props.rooms
+        let history = this.props.history
         return(
             <section class="d-flex flex-wrap justify-content-center">
                 {rooms.map(r => 
-                    <div class="col-md-5 mb-4">
+                    <div 
+                        class="col-md-5 mb-4" 
+                        style={{cursor: "pointer"}}
+                        onClick={() => {
+                            this.props.setVisitedRoom(r)
+                            history.push('/room_single')
+                        }}
+                    >
                         <div class="card-box-a card-shadow">
                             <div class="img-box-a card" style={{height: '22rem'}}>
                                 <img src={r.main_image_url} alt={r.title + "rooms"}  class="card-img-top align-self-center" style={{height: '22rem'}}/>
@@ -34,10 +42,16 @@ class RoomsClass extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setVisitedRoom: visited_room => dispatch({type: 'SET_VISITED_ROOMS' , visited_room})
+    }
+}
+
 const mapStateToProps = state => {
     return {
         rooms: state.rooms
     }
 }
 
-export default connect(mapStateToProps)(RoomsClass)
+export default connect(mapStateToProps , mapDispatchToProps)(RoomsGrid)
