@@ -2,6 +2,8 @@ import React , { Component } from 'react'
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {connect} from 'react-redux'
 
+import axios from 'axios'
+
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Rooms from './components/Rooms'
@@ -10,13 +12,9 @@ import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
-    fetch('http://localhost:5000/api/resorts')
-    .then(res => res.json())
-    .then(resorts => {
-      this.props.setRooms(resorts)
-    })
-    .catch(error => console.log(error))
-    console.log(process.env.PORT)
+    axios('/api/resorts')
+    .then(resorts => this.props.setRooms(resorts.data))
+    .catch(error  => console.log(error))
   }
   render(){
     return(
