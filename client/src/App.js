@@ -16,6 +16,7 @@ class App extends Component {
       this.props.setRooms(resorts)
     })
     .catch(error => console.log(error))
+    console.log(process.env.PORT)
   }
   render(){
     return(
