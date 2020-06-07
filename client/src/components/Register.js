@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 class Register extends Component {
     render(){
         return(
-            <div className="intro-single">
+            <div className="intro-single mt-5">
                 <div className="container">
                     <h3 className="text-center"> SIGN UP </h3>
                     <form>

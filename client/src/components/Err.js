@@ -3,8 +3,10 @@ import React , { Component } from 'react'
 class Err extends Component {
     render(){
         return(
-            <dv>
-                <h1>404 not found</h1>
+            <dv className="intro-single mt-5">
+                <div className="container">
+                    <h1>404 not found</h1>
+                </div>
             </dv>
         )
     }

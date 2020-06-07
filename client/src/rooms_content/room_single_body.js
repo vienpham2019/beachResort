@@ -10,7 +10,7 @@ class RoomSingleBody extends Component {
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="about-img-box">
-                                <img src={room.main_image_url} alt="rooms" class="img-fluid" style={{width: '70vw', height: "50vh"}}/>
+                                <img src={room.main_image_url} alt="rooms" class="img-fluid" style={{height: "50vh" , width: '100%'}}/>
                             </div>
                         </div>
                     </div>

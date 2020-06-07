@@ -23,24 +23,23 @@ class Navbar extends Component{
                     </button>
                     <div className="navbar-collapse collapse justify-content-center" id="navbarDefault">
                         <button 
-                            className="btn btn-outline-info ml-2 mr-2"
+                            className="btn btn-outline-info ml-1 mr-1"
                             onClick = {() => history.push('/')}
                         >
                             Home
                         </button>
                         <button 
-                            className="btn btn-outline-info ml-2 mr-2"
+                            className="btn btn-outline-info ml-1 mr-1"
                             onClick = {() => history.push('/rooms')}
                         >
                             Our Rooms
                         </button>
                         <button 
-                            className="btn btn-outline-info ml-2 mr-2"
+                            className="btn btn-outline-info ml-1 mr-1"
                             onClick = {() => {
                                 if(this.props.member){
                                     history.push('/member_profile')
                                 }else{
-                                    history.push('/')
                                     swal({
                                         title: "Please Login or Register !",
                                         icon: "warning",
@@ -75,7 +74,7 @@ class Navbar extends Component{
                         </button>
                         {this.props.member ? 
                             <button 
-                                className="btn btn-outline-info ml-2 mr-2"
+                                className="btn btn-outline-info ml-1 mr-1"
                                 onClick = {() => {
                                     this.props.setMember(null)
                                     history.push('/')
@@ -88,7 +87,7 @@ class Navbar extends Component{
                                 Logout
                             </button>
                         :   <button 
-                                className="btn btn-outline-info ml-2 mr-2"
+                                className="btn btn-outline-info ml-1 mr-1"
                                 onClick = {() => history.push('/login')}
                             >
                                 Login
