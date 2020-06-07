@@ -31,9 +31,7 @@ class App extends Component {
               <Route exact path="/register" render={(routerProps) => <Register {...routerProps} />}/>
               <Route exact path="/rooms" render={(routerProps) => <Rooms {...routerProps} />}/>
               <Route exact path="/room_single" render={(routerProps) => <RoomSingle {...routerProps} />}/>
-              {this.props.member ? 
-                <Route exact path="/member_profile" render={(routerProps) => <MemberProfile {...routerProps} />}/>
-              : null }
+              <Route exact path="/member_profile" render={(routerProps) => <MemberProfile {...routerProps} />}/>
               <Route component = {Err} />
           </Switch>
         </div>

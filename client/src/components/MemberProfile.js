@@ -1,22 +1,60 @@
 import React , { Component } from 'react'
 import {connect} from 'react-redux'
+import swal from '@sweetalert/with-react'
+
 
 class MemberProfile extends Component{
+
+    componentDidMount(){
+        if(!this.props.member){
+            let history = this.props.history
+            history.push('/')
+            swal({
+                title: "Please Login or Register !",
+                icon: "warning",
+                button: false,
+                content: (
+                    <div className="container">
+                        <button 
+                            className="btn btn-outline-info m-3"
+                            onClick = {() => {
+                                history.push('/login')
+                                swal.close()
+                            }}
+                        >
+                            Login
+                        </button>
+                        <button 
+                            className="btn btn-outline-info m-3"
+                            onClick = {() => {
+                                history.push('/register')
+                                swal.close()
+                            }}
+                        >
+                            Sign up 
+                        </button>
+                    </div>
+                )
+            })
+        }
+    }
     render(){
         let history = this.props.history
         let member = this.props.member
         return(
             <div>
+            {member ?  
+            <div> 
                 <section class="intro-single">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-lg-8">
                                 <div class="title-single-box">
-                                    <h1 class="title-single">Vien Pham</h1>
+                                    <h1 class="title-single">{member.user_name}</h1>
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-4">
-                                <img src="https://www.agriuniverse.co.zw/media/com_easysocial/photos/232/582/man-avatar-icon-flat-vector-19152370_large.jpg" className="align-self-start mr-3" alt="img" 
+                                <img src={member.profile_img} className="align-self-start mr-3" alt="img" 
                                 style={{width: '5em' , height: '5em'}}
                                 />
                             </div>
@@ -29,7 +67,7 @@ class MemberProfile extends Component{
                 >
                     <h4 className="text-center">Your Rooms</h4>
                     <div className="container">
-                        {member.book_rooms.map(room => 
+                        {member.resort_rooms.map(room => 
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
@@ -56,6 +94,8 @@ class MemberProfile extends Component{
                         )}
                     </div>
                 </div>
+            </div>
+            : null }
             </div>
         )
     }
