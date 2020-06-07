@@ -59,11 +59,11 @@ class Navbar extends Component{
                                                 <button 
                                                     className="btn btn-outline-info m-3"
                                                     onClick = {() => {
-                                                        history.push('/login')
+                                                        history.push('/register')
                                                         swal.close()
                                                     }}
                                                 >
-                                                    Register 
+                                                    Sign up 
                                                 </button>
                                             </div>
                                         )

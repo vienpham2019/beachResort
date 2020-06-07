@@ -24,12 +24,12 @@ body {
   }
   
   a {
-    color: #000000;
-    transition: all .5s ease;
+    color: #4c83eb;
+    transition: all .3s ease-in-out;
   }
   
   a:hover {
-    color: #2eca6a;
+    color: #06a072;
     text-decoration: none;
   }
   

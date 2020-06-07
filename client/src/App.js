@@ -11,6 +11,8 @@ import Err from './components/Err'
 import Footer from './components/Footer'
 import RoomSingle from './rooms_content/room_single'
 import MemberProfile from './components/MemberProfile'
+import Login from './components/Login'
+import Register from './components/Register'
 
 class App extends Component {
   componentDidMount(){
@@ -22,15 +24,19 @@ class App extends Component {
     return(
       <Router>
         <Route render={(routerProps) => <Navbar {...routerProps} />}/> 
-        <Switch>
-          <Route exact path="/" render={(routerProps) => <Home {...routerProps} />}/>
-          <Route exact path="/rooms" render={(routerProps) => <Rooms {...routerProps} />}/>
-          <Route exact path="/room_single" render={(routerProps) => <RoomSingle {...routerProps} />}/>
-          {this.props.member ? 
-            <Route exact path="/member_profile" render={(routerProps) => <MemberProfile {...routerProps} />}/>
-          : null }
-          <Route component = {Err} />
-        </Switch>
+        <div style={{minHeight: '75vh'}}>
+          <Switch>
+              <Route exact path="/" render={(routerProps) => <Home {...routerProps} />}/>
+              <Route exact path="/login" render={(routerProps) => <Login {...routerProps} />}/>
+              <Route exact path="/register" render={(routerProps) => <Register {...routerProps} />}/>
+              <Route exact path="/rooms" render={(routerProps) => <Rooms {...routerProps} />}/>
+              <Route exact path="/room_single" render={(routerProps) => <RoomSingle {...routerProps} />}/>
+              {this.props.member ? 
+                <Route exact path="/member_profile" render={(routerProps) => <MemberProfile {...routerProps} />}/>
+              : null }
+              <Route component = {Err} />
+          </Switch>
+        </div>
         <Footer />
       </Router>
     )
