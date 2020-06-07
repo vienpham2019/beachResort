@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
 import {connect} from 'react-redux'
+import swal from '@sweetalert/with-react'
 
 class Navbar extends Component{
     render(){
@@ -36,15 +37,73 @@ class Navbar extends Component{
                         <button 
                             className="btn btn-outline-info ml-2 mr-2"
                             onClick = {() => {
-                                this.props.member ? history.push('/member_profile') : history.push('/')
+                                if(this.props.member){
+                                    history.push('/member_profile')
+                                }else{
+                                    history.push('/')
+                                    swal({
+                                        title: "Please Login or Register !",
+                                        icon: "warning",
+                                        button: false,
+                                        content: (
+                                            <div className="container">
+                                                <button 
+                                                    className="btn btn-outline-info m-3"
+                                                    onClick = {() => {
+                                                        history.push('/login')
+                                                        swal.close()
+                                                    }}
+                                                >
+                                                    Login
+                                                </button>
+                                                <button 
+                                                    className="btn btn-outline-info m-3"
+                                                    onClick = {() => {
+                                                        history.push('/login')
+                                                        swal.close()
+                                                    }}
+                                                >
+                                                    Register 
+                                                </button>
+                                            </div>
+                                        )
+                                    })
+                                }
                             }}
                         >
                             Member Profile
                         </button>
+                        {this.props.member ? 
+                            <button 
+                                className="btn btn-outline-info ml-2 mr-2"
+                                onClick = {() => {
+                                    this.props.setMember(null)
+                                    history.push('/')
+                                    swal({
+                                        title: "Logout Successful !",
+                                        icon: "success",
+                                    });
+                                }}
+                            >
+                                Logout
+                            </button>
+                        :   <button 
+                                className="btn btn-outline-info ml-2 mr-2"
+                                onClick = {() => history.push('/login')}
+                            >
+                                Login
+                            </button>
+                        }
                     </div>
                 </div>
             </nav>
         )
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        setMember: member => dispatch({type: 'SET_MEMBER', member})
     }
 }
 
@@ -54,4 +113,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

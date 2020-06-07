@@ -13,6 +13,11 @@ const rooms_reducer = (state = init_state , action) => {
             return {
                 ...state, visited_room: action.visited_room
             }
+
+        case "SET_MEMBER": 
+            return{
+                ...state, member: action.member
+            }
     
         default:
             return state
