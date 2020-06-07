@@ -4,20 +4,20 @@ class Footer extends Component {
     render(){
         return(
             <footer>
-                <div class="widget-a">
-                    <div class="w-header-a">
-                        <h3 class="w-title-a text-brand">Vintage Village</h3>
+                <div className="widget-a">
+                    <div className="w-header-a">
+                        <h3 className="w-title-a text-brand">Vintage Village</h3>
                     </div>
-                    <div class="w-body-a">
-                        <p class="w-text-a color-text-a">
+                    <div className="w-body-a">
+                        <p className="w-text-a color-text-a">
                             Where the little things matter!
                         </p>
                     </div>
                 </div>
-                <div class="copyright-footer">
-                    <p class="copyright color-text-a">
+                <div className="copyright-footer">
+                    <p className="copyright color-text-a">
                     &copy; Copyright
-                    <span class="color-a"> Vintage Village</span>.
+                    <span className="color-a"> Vintage Village</span>.
                     </p>
                 </div>
             </footer> 

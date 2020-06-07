@@ -10,6 +10,7 @@ import Rooms from './components/Rooms'
 import Err from './components/Err'
 import Footer from './components/Footer'
 import RoomSingle from './rooms_content/room_single'
+import MemberProfile from './components/MemberProfile'
 
 class App extends Component {
   componentDidMount(){
@@ -25,6 +26,9 @@ class App extends Component {
           <Route exact path="/" render={(routerProps) => <Home {...routerProps} />}/>
           <Route exact path="/rooms" render={(routerProps) => <Rooms {...routerProps} />}/>
           <Route exact path="/room_single" render={(routerProps) => <RoomSingle {...routerProps} />}/>
+          {this.props.member ? 
+            <Route exact path="/member_profile" render={(routerProps) => <MemberProfile {...routerProps} />}/>
+          : null }
           <Route component = {Err} />
         </Switch>
         <Footer />
@@ -39,4 +43,10 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App)
+const mapStateToProps = state => {
+  return{
+    member: state.member
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

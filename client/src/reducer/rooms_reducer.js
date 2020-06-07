@@ -1,6 +1,7 @@
 let init_state = {
     rooms: [],
-    visited_room: null 
+    visited_room: null,
+    member: null 
 }
 
 const rooms_reducer = (state = init_state , action) => {

@@ -4,7 +4,7 @@ class HomeHeader extends Component {
     render(){
         return(
             <div className="intro intro-carousel">
-                <div id="carousel" class="owl-carousel owl-theme">
+                <div id="carousel" className="owl-carousel owl-theme">
                     <div className="carousel-item-a intro-item bg-image" style={{backgroundImage: 'url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/itemimages/94/84/94842_v5.jpeg)'}}>
                     <div className="overlay overlay-a"></div>
                         <div className="intro-content display-table">
@@ -21,7 +21,7 @@ class HomeHeader extends Component {
                                                     Vintage<span className="color-b"> Village</span> <br/>
                                                     Resort
                                                 </h1>
-                                                <p class="intro-subtitle intro-price">
+                                                <p className="intro-subtitle intro-price">
                                                     LUXURY HOLTELS AND SPA
                                                 </p>
                                             </div>

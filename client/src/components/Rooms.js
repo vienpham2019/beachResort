@@ -3,13 +3,16 @@ import React , { Component } from 'react'
 import RoomsGrid from '../rooms_content/rooms_grid'
 
 class Rooms extends Component {
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     render(){
         return(
             <div>
-                <section class="intro-single">
-                    <div class="container">
-                        <div class="title-single-box">
-                            <h1 class="title-single">Our Rooms</h1>
+                <section className="intro-single">
+                    <div className="container">
+                        <div className="title-single-box">
+                            <h1 className="title-single">Our Rooms</h1>
                         </div>
                     </div>
                 </section>

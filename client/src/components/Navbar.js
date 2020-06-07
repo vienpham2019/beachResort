@@ -1,4 +1,5 @@
 import React , { Component } from 'react'
+import {connect} from 'react-redux'
 
 class Navbar extends Component{
     render(){
@@ -30,7 +31,15 @@ class Navbar extends Component{
                             className="btn btn-outline-info ml-2 mr-2"
                             onClick = {() => history.push('/rooms')}
                         >
-                            Rooms
+                            Our Rooms
+                        </button>
+                        <button 
+                            className="btn btn-outline-info ml-2 mr-2"
+                            onClick = {() => {
+                                this.props.member ? history.push('/member_profile') : history.push('/')
+                            }}
+                        >
+                            Member Profile
                         </button>
                     </div>
                 </div>
@@ -39,4 +48,10 @@ class Navbar extends Component{
     }
 }
 
-export default Navbar
+const mapStateToProps = state => {
+    return {
+        member: state.member
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)
