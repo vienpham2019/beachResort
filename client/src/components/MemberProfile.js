@@ -45,15 +45,15 @@ class MemberProfile extends Component{
             <div>
             {member ?  
             <div> 
-                <section class="intro-single">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-8">
-                                <div class="title-single-box">
-                                    <h1 class="title-single">{member.user_name}</h1>
+                <section className="intro-single">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-lg-8">
+                                <div className="title-single-box">
+                                    <h1 className="title-single">{member.user_name}</h1>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-lg-4">
+                            <div className="col-md-12 col-lg-4">
                                 <img src={member.profile_img} className="align-self-start mr-3" alt="img" 
                                 style={{width: '5em' , height: '5em'}}
                                 />
@@ -68,14 +68,14 @@ class MemberProfile extends Component{
                     <h4 className="text-center">Your Rooms</h4>
                     <div className="container">
                         {member.resort_rooms.map(room => 
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row no-gutters">
-                                    <div class="col-md-4">
-                                        <img src={room.main_image_url} class="card-img" alt="roomImg"/>
+                            <div className="card mb-3" style="max-width: 540px;">
+                                <div className="row no-gutters">
+                                    <div className="col-md-4">
+                                        <img src={room.main_image_url} className="card-img" alt="roomImg"/>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{room.title}</h5>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{room.title}</h5>
                                             <h6 className="card-title"> Description </h6>
                                             <p class="card-text">
                                                 {room.description}

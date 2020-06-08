@@ -5,6 +5,7 @@ import RoomSingleHeader from './room_single_header'
 import RoomSingleBody from './room_single_body'
 import RoomSingleInfo from './room_single_info'
 import RoomSingleComment from './room_single_comment'
+import BookRoomModal from './book_room_modal'
 
 class RoomSingle extends  Component {
 
@@ -25,6 +26,7 @@ class RoomSingle extends  Component {
                         <RoomSingleBody />
                         <RoomSingleInfo /> 
                         <RoomSingleComment />
+                        <BookRoomModal /> 
                     </div>  
                 : null }
             </div>
