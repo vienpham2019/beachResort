@@ -4,18 +4,31 @@ import {connect} from 'react-redux'
 
 class RoomSingleComment extends Component {
 
+    handleSubmit = e => {
+        e.preventDefault()
+        let member = this.props.member 
+        if(!member){
+            this.props.loginAlear()
+        }
+    }
+
     render(){
         let room = this.props.visited_room
         let comment_length = room.comments.length
         return(
             <div className="container">
                 <h4>{comment_length} Comment{comment_length > 1 ? "s" : ""}</h4>
-                <form>
+                <form onSubmit = {(e) => this.handleSubmit(e)}>
                     <div className="form-group">
                         <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add a public comment..."></textarea>
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-info" type="submit">Submit</button>
+                        <button 
+                            className="btn btn-info" 
+                            type="submit"
+                        >
+                            Submit
+                        </button>
                     </div>
                 </form>
                 <div 
@@ -48,7 +61,8 @@ class RoomSingleComment extends Component {
 
 const mapStateToProps = state => {
     return{
-        visited_room: state.visited_room
+        visited_room: state.visited_room,
+        member: state.member
     }
 }
 

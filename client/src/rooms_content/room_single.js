@@ -7,6 +7,9 @@ import RoomSingleInfo from './room_single_info'
 import RoomSingleComment from './room_single_comment'
 import BookRoomModal from './book_room_modal'
 
+import swal from '@sweetalert/with-react'
+
+
 class RoomSingle extends  Component {
 
     componentDidMount(){
@@ -14,6 +17,37 @@ class RoomSingle extends  Component {
         if(!this.props.visited_room){
             this.props.history.push('/rooms')
         }
+    }
+
+    loginAlear = () => {
+        let history = this.props.history
+        swal({
+            title: "Please Login or Register !",
+            icon: "warning",
+            button: false,
+            content: (
+                <div className="container">
+                    <button 
+                        className="btn btn-outline-info m-3"
+                        onClick = {() => {
+                            history.push('/login')
+                            swal.close()
+                        }}
+                    >
+                        Login
+                    </button>
+                    <button 
+                        className="btn btn-outline-info m-3"
+                        onClick = {() => {
+                            history.push('/register')
+                            swal.close()
+                        }}
+                    >
+                        Sign up 
+                    </button>
+                </div>
+            )
+        })
     }
 
     render(){
@@ -24,8 +58,8 @@ class RoomSingle extends  Component {
                     <div>
                         <RoomSingleHeader /> 
                         <RoomSingleBody />
-                        <RoomSingleInfo /> 
-                        <RoomSingleComment />
+                        <RoomSingleInfo loginAlear = {this.loginAlear}/> 
+                        <RoomSingleComment loginAlear = {this.loginAlear}/>
                         <BookRoomModal /> 
                     </div>  
                 : null }

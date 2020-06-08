@@ -73,5 +73,28 @@ router.post('/login', (req,res) => {
     })
 })
 
+// update member resort room 
+router.post('/update_resort_rooms' , (req,res) => {
+    let {member_token , new_room} = req.body 
+    jwt.verify(member_token, process.env.jwt_key, (err , decoded) => {
+        if(err) throw err
+        User.findOne({_id: decoded.id})
+        .then(user => {
+            if(user){
+                user.resort_rooms = new_room
+                user.save()
+                .then(newUser => {
+                    if(newUser){
+                        res.json({msg: "Update Succsess"})
+                    }
+                })
+                .catch(error => console.log(error))
+            }
+
+        })
+        .catch(error => console.log(error))
+    })
+})
+
 
 module.exports = router

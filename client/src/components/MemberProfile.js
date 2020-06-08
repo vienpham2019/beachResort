@@ -53,7 +53,7 @@ class MemberProfile extends Component{
                                     <h1 className="title-single">{member.user_name}</h1>
                                 </div>
                             </div>
-                            <div className="col-md-12 col-lg-4">
+                            <div className="col-md-12 col-lg-4 text-right">
                                 <img src={member.profile_img} className="align-self-start mr-3" alt="img" 
                                 style={{width: '5em' , height: '5em'}}
                                 />
@@ -67,26 +67,53 @@ class MemberProfile extends Component{
                 >
                     <h4 className="text-center">Your Rooms</h4>
                     <div className="container">
-                        {member.resort_rooms.map(room => 
-                            <div className="card mb-3" style="max-width: 540px;">
+                        {member.resort_rooms.map(r => 
+                            <div className="card mb-3" style={{maxWidth: '800px', margin: '0 auto'}}>
                                 <div className="row no-gutters">
                                     <div className="col-md-4">
-                                        <img src={room.main_image_url} className="card-img" alt="roomImg"/>
+                                        <img src={r.room.main_image_url} className="card-img" alt="roomImg"/>
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
-                                            <h5 className="card-title">{room.title}</h5>
-                                            <h6 className="card-title"> Description </h6>
-                                            <p class="card-text">
-                                                {room.description}
-                                            </p>
-                                            <button 
-                                                className="btn btn-info"
-                                                onClick={() => {
-                                                    this.props.setVisitedRoom(room)
-                                                    history.push('/room_single')
-                                                }}
-                                            >View room details</button>
+                                            <h5 className="card-title text-uppercase">{r.room.title}</h5>
+                                            <ul>
+                                                <li>
+                                                    <strong>Start date</strong>: {`${r.start_date}`}
+                                                </li>
+                                                <li>
+                                                    <strong>End date</strong>: {`${r.end_date}`}
+                                                </li>
+                                                <li>
+                                                    <strong>Amount (rooms)</strong>: {r.amount}
+                                                </li>
+                                                {r.notes === '' 
+                                                    ? null  
+                                                    :<li>
+                                                        <strong>Notes</strong>: {r.notes}
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <div className="d-flex">
+                                                <div className="p-2 flex-grow-1">
+                                                    <button 
+                                                        className="btn btn-info"
+                                                        onClick={() => {
+                                                            this.props.setVisitedRoom(r.room)
+                                                            history.push('/room_single')
+                                                        }}
+                                                    >View room details</button>
+                                                </div>
+                                                <div className="p-3">
+                                                    <button 
+                                                        className="btn btn-danger"
+                                                        onClick = {() => {
+                                                            this.props.delete_book_room(r)
+                                                        }}
+                                                    >
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +130,8 @@ class MemberProfile extends Component{
 
 const mapDispatchToProps = dispatch => {
     return{
-        setVisitedRoom: visited_room => dispatch({type: 'SET_VISITED_ROOMS' , visited_room})
+        setVisitedRoom: visited_room => dispatch({type: 'SET_VISITED_ROOMS' , visited_room}),
+        delete_book_room: room => dispatch({type: 'DELETE_BOOK_ROOM' , room })
     }
 }
 

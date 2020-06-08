@@ -1,10 +1,13 @@
 import React , { Component } from 'react'
+import swal from '@sweetalert/with-react'
 
 import {connect} from 'react-redux'
 
 class RoomSingleInfo extends Component {
     render(){
         let room = this.props.visited_room
+        let member = this.props.member 
+        let history = this.props.history
         return(
             <div className="container mt-4">
                 <div className="row justify-content-between">
@@ -14,9 +17,14 @@ class RoomSingleInfo extends Component {
                                 <div className="col-sm-12 text-center">
                                     <button 
                                         className="btn btn-info" 
-                                        data-toggle="modal" 
-                                        data-target="#exampleModal" 
-                                        data-whatever="@mdo"
+                                        data-toggle= { member ? "modal" : "" } 
+                                        data-target={ member ? "#exampleModal"  : "" }
+                                        data-whatever={ member ? "@mdo" : "" }
+                                        onClick = {() => {
+                                            if(!member){
+                                                this.props.loginAlear()
+                                            } 
+                                        }}
                                     >
                                         BookRoom
                                     </button>
@@ -91,7 +99,8 @@ class RoomSingleInfo extends Component {
 
 const mapStateToProps = state => {
     return{
-        visited_room: state.visited_room 
+        visited_room: state.visited_room,
+        member: state.member
     }
 }
 
