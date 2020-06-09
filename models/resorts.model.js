@@ -51,6 +51,11 @@ const ResortSchema = new Schema({
         type: Array, 
         default: [],
         required: true
+    },
+    comments: {
+        type: Array, 
+        default: [],
+        required: true 
     }
 })
 

@@ -1,30 +1,40 @@
 import React , { Component } from 'react'
-
+import {v4 as uuidv4} from 'uuid'
 import {connect} from 'react-redux'
 
 class RoomSingleComment extends Component {
-
+    state = {}
     handleSubmit = e => {
         e.preventDefault()
         let content = e.target[0].value
         let room = this.props.visited_room
         let member = this.props.member 
-        if(!member){
-            this.props.loginAlear()
-        }else{
+        if(member){
             let new_member_comment = {
+                id: uuidv4(),
                 author: member.email, 
                 content
             }
 
-            this.props.addRoomComment(room , new_member_comment , member)
+            this.props.addRoomComment(room , new_member_comment)
+            this.setState({})
+        }else{
+            this.props.loginAlear()
         }
+        e.target.reset()
+    }
+
+    handelDeleteComment = (comment) => {
+        let {visited_room, deleteRoomComment} = this.props
+        deleteRoomComment(visited_room,comment)
+        this.setState({})
     }
 
     render(){
         let room = this.props.visited_room
         let comment_length = room.comments.length
-        console.log(this.props.all_users['vienpham2015@gmail.com'])
+        let all_users = this.props.all_users
+        let member = this.props.member
         return(
             <div className="container">
                 <h4>{comment_length} Comment{comment_length > 1 ? "s" : ""}</h4>
@@ -45,15 +55,31 @@ class RoomSingleComment extends Component {
                     className="container shadow-sm p-3 mb-5 bg-white rounded" 
                     style={{maxHeight: '30em', overflow: 'auto'}}
                 >
-                    {room.comments.length > 0 ? 
+                    {comment_length > 0 ? 
                         room.comments.map(comment => 
                             <div className="media m-3">
-                                <img src="https://www.agriuniverse.co.zw/media/com_easysocial/photos/232/582/man-avatar-icon-flat-vector-19152370_large.jpg" className="align-self-start mr-3" alt="img" 
+                                <img src={all_users[comment.author].profile_img} className="align-self-start mr-3" alt="img" 
                                     style={{width: '3em' , height: '3em'}}
                                 />
                                 <div className="media-body">
-                                    <h5 className="mt-0">{comment.author}</h5>
-                                    <p>{comment.content}</p>
+                                    <div class="d-flex bd-highlight">
+                                        <div className="p-2 w-100">
+                                            <h5 className="mt-0">{all_users[comment.author].user_name}</h5>
+                                            <p>{comment.content}</p>
+                                        </div>
+                                        <div className="p-2">
+                                            {member ? 
+                                                member.user_name === all_users[comment.author].user_name ? 
+                                                    <button 
+                                                        className="btn btn-danger" 
+                                                        onClick={() => this.handelDeleteComment(comment)}
+                                                    >
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                : null 
+                                            : null }
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                         )
@@ -71,7 +97,8 @@ class RoomSingleComment extends Component {
 
 const mapDispatchToProps = dispatch => {
     return{
-        addRoomComment: (room , new_member_comment , member) => dispatch({type: "ADD_ROOM_COMMENT" , room , new_member_comment , member })
+        addRoomComment: (room , new_member_comment) => dispatch({type: "ADD_ROOM_COMMENT" , room , new_member_comment}), 
+        deleteRoomComment: (room,comment) => dispatch({type: "DELETE_ROOM_COMMENT" , room , comment})
     }
 }
 

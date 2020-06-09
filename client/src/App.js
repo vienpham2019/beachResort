@@ -19,6 +19,10 @@ class App extends Component {
     axios('/api/resorts')
     .then(resorts => this.props.setRooms(resorts.data))
     .catch(error  => console.log(error))
+
+    axios('/api/users/')
+      .then(all_users => this.props.setAllUsers(all_users.data))
+      .catch(error => console.log(error))
   }
   render(){
     return(
@@ -43,7 +47,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setRooms: rooms => dispatch({type: "SET_ROOMS", rooms})
+    setRooms: rooms => dispatch({type: "SET_ROOMS", rooms}),
+    setAllUsers: all_users => dispatch({type: "SET_ALL_USERS", all_users})
   }
 }
 

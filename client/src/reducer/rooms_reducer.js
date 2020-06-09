@@ -1,4 +1,9 @@
-import {update_member_resortrooms , update_member_info} from './reducer_helper_method.js/update_member_resortroom'
+import {
+    update_member_resortrooms , 
+    update_member_info , 
+    update_resort_room_comment,
+    delete_resort_room_comment
+} from './reducer_helper_method.js/update_member_resortroom'
 let init_state = {
     rooms: [],
     visited_room: null,
@@ -51,6 +56,23 @@ const rooms_reducer = (state = init_state , action) => {
                 ...state, member: {
                     ...state.member, resort_rooms: delete_book_rooms
                 }
+            }
+
+        case "ADD_ROOM_COMMENT": 
+            let {room , new_member_comment } = action
+            update_resort_room_comment(room._id , new_member_comment)
+            let add_comment_room = state.rooms.find(r => r === room)
+            add_comment_room.comments = [new_member_comment,...add_comment_room.comments]
+            return {
+                ...state, visited_room: add_comment_room
+            }
+
+        case "DELETE_ROOM_COMMENT": 
+            delete_resort_room_comment(action.room._id, action.comment)
+            let delete_room_comments = state.rooms.find(room => room === action.room)
+            delete_room_comments.comments = delete_room_comments.comments.filter(c => c.id !== action.comment.id)
+            return{
+                ...state, visited_room: delete_room_comments
             }
     
         default:

@@ -56,6 +56,7 @@ class RoomSingle extends  Component {
 
     render(){
         let room = this.props.visited_room
+        console.log(room)
         return(
             <div>
                 {room ?
