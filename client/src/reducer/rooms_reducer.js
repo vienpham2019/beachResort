@@ -1,8 +1,9 @@
-import update_member_resortrooms from './reducer_helper_method.js/update_member_resortroom'
+import {update_member_resortrooms , update_member_info} from './reducer_helper_method.js/update_member_resortroom'
 let init_state = {
     rooms: [],
     visited_room: null,
-    member: null
+    member: null,
+    all_users: []
 }
 
 const rooms_reducer = (state = init_state , action) => {
@@ -18,6 +19,20 @@ const rooms_reducer = (state = init_state , action) => {
         case "SET_MEMBER": 
             return{
                 ...state, member: action.member
+            }
+
+        case "SET_ALL_USERS":
+            return{
+                ...state, all_users: action.all_users
+            }
+
+        case "UPDATE MEMBER": 
+            let {user_name, profile_img} = action.member 
+            update_member_info(state.member.token , user_name, profile_img)
+            return{
+                ...state, member: {
+                    ...state.member, user_name , profile_img
+                }
             }
 
         case "ADD_BOOK_ROOM": 

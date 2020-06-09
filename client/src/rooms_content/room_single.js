@@ -7,6 +7,7 @@ import RoomSingleInfo from './room_single_info'
 import RoomSingleComment from './room_single_comment'
 import BookRoomModal from './book_room_modal'
 
+import axios from 'axios'
 import swal from '@sweetalert/with-react'
 
 
@@ -17,6 +18,9 @@ class RoomSingle extends  Component {
         if(!this.props.visited_room){
             this.props.history.push('/rooms')
         }
+        axios('/api/users/')
+        .then(all_users => this.props.setAllUsers(all_users.data))
+        .catch(error => console.log(error))
     }
 
     loginAlear = () => {
@@ -68,10 +72,16 @@ class RoomSingle extends  Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setAllUsers: all_users => dispatch({type: "SET_ALL_USERS", all_users})
+    }
+}
+
 const mapStateToProps = state => {
     return{
         visited_room: state.visited_room
     }
 }
 
-export default connect(mapStateToProps)(RoomSingle)
+export default connect(mapStateToProps, mapDispatchToProps)(RoomSingle)

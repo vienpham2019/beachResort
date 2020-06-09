@@ -6,15 +6,25 @@ class RoomSingleComment extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
+        let content = e.target[0].value
+        let room = this.props.visited_room
         let member = this.props.member 
         if(!member){
             this.props.loginAlear()
+        }else{
+            let new_member_comment = {
+                author: member.email, 
+                content
+            }
+
+            this.props.addRoomComment(room , new_member_comment , member)
         }
     }
 
     render(){
         let room = this.props.visited_room
         let comment_length = room.comments.length
+        console.log(this.props.all_users['vienpham2015@gmail.com'])
         return(
             <div className="container">
                 <h4>{comment_length} Comment{comment_length > 1 ? "s" : ""}</h4>
@@ -59,11 +69,18 @@ class RoomSingleComment extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
     return{
-        visited_room: state.visited_room,
-        member: state.member
+        addRoomComment: (room , new_member_comment , member) => dispatch({type: "ADD_ROOM_COMMENT" , room , new_member_comment , member })
     }
 }
 
-export default connect(mapStateToProps)(RoomSingleComment)
+const mapStateToProps = state => {
+    return{
+        visited_room: state.visited_room,
+        member: state.member,
+        all_users: state.all_users
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomSingleComment)

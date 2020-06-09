@@ -6,6 +6,21 @@ require('dotenv/config')
 
 let User = require('../../models/user.model')
 
+// Get all user info 
+router.get('/' , (req,res) => {
+    User.find()
+    .then(users => {
+        if(users){
+            let new_users = {}
+            users.forEach(user => {
+                let {user_name, email , profile_img} = user 
+                new_users[email] = {user_name , profile_img}
+            })
+            res.json(new_users)
+        }
+    })
+})
+
 // Resigter 
 router.post('/register' , (req,res) => {
     let error = []
@@ -62,9 +77,9 @@ router.post('/login', (req,res) => {
                 if(isMatch){
                     let token = jwt.sign({id: user.id} , process.env.jwt_key , {algorithm: "HS256"})
 
-                    let {user_name, resort_rooms , profile_img} = user 
+                    let {user_name, resort_rooms , profile_img, email} = user 
 
-                    res.json({user: {user_name, resort_rooms , profile_img , token}}) 
+                    res.json({user: {user_name, resort_rooms , profile_img , email , token}}) 
                 }else{
                     res.json({error: "Invalid email or password."})
                 }
@@ -96,5 +111,28 @@ router.post('/update_resort_rooms' , (req,res) => {
     })
 })
 
+// update member info 
+router.post('/update_info' , (req,res) => {
+    let {member_token, user_name , profile_img} = req.body 
+    jwt.verify(member_token, process.env.jwt_key, (err , decoded) => {
+        if(err) throw err
+        User.findOne({_id: decoded.id})
+        .then(user => {
+            if(user){
+                user.user_name = user_name
+                user.profile_img = profile_img
+                user.save()
+                .then(newUser => {
+                    if(newUser){
+                        res.json({msg: "Update Succsess"})
+                    }
+                })
+                .catch(error => console.log(error))
+            }
+
+        })
+        .catch(error => console.log(error))
+    })
+})
 
 module.exports = router

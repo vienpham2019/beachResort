@@ -2,6 +2,8 @@ import React , { Component } from 'react'
 import {connect} from 'react-redux'
 import swal from '@sweetalert/with-react'
 
+import MemberEditModal from '../member_profie_content/member_edit_modal'
+
 
 class MemberProfile extends Component{
 
@@ -38,6 +40,27 @@ class MemberProfile extends Component{
             })
         }
     }
+
+    handelDelete = room => {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+              })
+              this.props.delete_book_room(room)
+            } else {
+              swal("Your imaginary file is safe!");
+            }
+          });
+    }
+
     render(){
         let history = this.props.history
         let member = this.props.member
@@ -57,6 +80,9 @@ class MemberProfile extends Component{
                                 <img src={member.profile_img} className="align-self-start mr-3" alt="img" 
                                 style={{width: '5em' , height: '5em'}}
                                 />
+                                <button className="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                                    <i className="fas fa-cog"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -107,7 +133,7 @@ class MemberProfile extends Component{
                                                     <button 
                                                         className="btn btn-danger"
                                                         onClick = {() => {
-                                                            this.props.delete_book_room(r)
+                                                            this.handelDelete(r)
                                                         }}
                                                     >
                                                         <i class="fas fa-trash"></i> Delete
@@ -121,6 +147,7 @@ class MemberProfile extends Component{
                         )}
                     </div>
                 </div>
+                <MemberEditModal /> 
             </div>
             : null }
             </div>

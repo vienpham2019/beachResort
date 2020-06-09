@@ -43,7 +43,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setRooms: rooms => dispatch({type: "SET_ROOMS", rooms}) 
+    setRooms: rooms => dispatch({type: "SET_ROOMS", rooms})
   }
 }
 

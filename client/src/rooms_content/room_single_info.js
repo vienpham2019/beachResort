@@ -7,7 +7,6 @@ class RoomSingleInfo extends Component {
     render(){
         let room = this.props.visited_room
         let member = this.props.member 
-        let history = this.props.history
         return(
             <div className="container mt-4">
                 <div className="row justify-content-between">
